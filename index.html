@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фото-баннер со скроллом</title>
+    <title>Главная — Фото-баннер со скроллом</title>
     <style>
         /* Включаем плавную прокрутку для всей страницы */
         html {
@@ -22,13 +22,13 @@
         .hero-banner {
             position: relative;
             width: 100%;
-            height: 100vh; /* Сделали баннер на весь экран, чтобы скролл вниз имел явный смысл */
+            height: 100vh;
             min-height: 500px;
             
             /* Ваша ссылка на фото */
             background-image: url('https://sun9-36.vkuserphoto.ru/s/v1/ig2/FDkhHWQLz0H6QRZ_PSiMUix26wF0wQLAEe5mIW1Ux544ntxgJRKpbN7i8QbdJ0RaD7Us94MaqAcFfHYKCJoFaI1c.jpg?quality=95&as=32x18,48x27,72x41,108x62,160x92,240x137,360x206,480x275,540x309,640x366,720x412,1080x618,1212x694&from=bu&cs=1212x0');
             
-            background-size: cover; /* Для полноэкранного баннера cover подходит лучше, чтобы не было пустых полей */
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             
@@ -45,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* 40% затемнения */
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -57,7 +57,7 @@
             color: #ffffff;
             padding: 0 20px;
             max-width: 800px;
-            margin-bottom: 50px; /* Оставляем место внизу для иконки мышки */
+            margin-bottom: 50px;
         }
 
         /* Заголовок */
@@ -146,18 +146,9 @@
 
         /* Анимация движения колёсика вниз */
         @keyframes scroll-wheel {
-            0% {
-                top: 8px;
-                opacity: 1;
-            }
-            50% {
-                top: 18px;
-                opacity: 0.3;
-            }
-            100% {
-                top: 8px;
-                opacity: 1;
-            }
+            0% { top: 8px; opacity: 1; }
+            50% { top: 18px; opacity: 0.3; }
+            100% { top: 8px; opacity: 1; }
         }
 
         /* Секция контента под баннером (куда будет идти прокрутка) */
@@ -184,7 +175,7 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .hero-banner {
-                height: 100vh; /* На смартфонах баннер тоже займет весь экран */
+                height: 100vh;
                 min-height: 450px;
             }
             .banner-title {
@@ -213,25 +204,24 @@
 <body>
 
     <section class="hero-banner">
-    <div class="banner-content">
-        <h1 class="banner-title"></h1>
-        <p class="banner-subtitle"></p>
-        <a href="#year-2025-2026" class="banner-btn">2025/2026 год</a>
-    </div>
-
-    <a href="#next-section" class="scroll-indicator" aria-label="Прокрутить вниз">
-        <div class="mouse">
-            <div class="wheel"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">Ваша идеальная поездка</h1>
+            <p class="banner-subtitle">Откройте для себя невероятные места</p>
+            <a href="page2.html" class="banner-btn">2025/2026 год</a>
         </div>
-        <span>Листайте вниз</span>
-    </a>
-</section>
 
-<section id="next-section" class="main-content">
-    <h2>Добро пожаловать в путешествие</h2>
-    <p>Здесь начинается основной контент вашего сайта. При прокрутке колёсиком мыши, свайпом на телефоне или при клике на кнопку «Листайте вниз» страница плавно переместится к этой текстовой секции.</p>
-</section>
+        <a href="#next-section" class="scroll-indicator" aria-label="Прокрутить вниз">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Листайте вниз</span>
+        </a>
+    </section>
 
+    <section id="next-section" class="main-content">
+        <h2>Добро пожаловать в путешествие</h2>
+        <p>Здесь начинается основной контент вашего сайта. При прокрутке колёсиком мыши, свайпом на телефоне или при клике на кнопку «Листайте вниз» страница плавно переместится к этой текстовой секции.</p>
+    </section>
     
 </body>
 </html>
