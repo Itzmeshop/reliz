@@ -17,13 +17,17 @@
         .hero-banner {
             position: relative;
             width: 100%;
-            height: 30vh; /* Баннер займет 80% высоты экрана */
+            height: 30vh; /* Баннер займет 30% высоты экрана */
             min-height: 250px;
-            /* Замените URL ниже на ссылку на ваше фото */
+            
+            /* Ваша ссылка на фото */
             background-image: url('https://sun9-36.vkuserphoto.ru/s/v1/ig2/FDkhHWQLz0H6QRZ_PSiMUix26wF0wQLAEe5mIW1Ux544ntxgJRKpbN7i8QbdJ0RaD7Us94MaqAcFfHYKCJoFaI1c.jpg?quality=95&as=32x18,48x27,72x41,108x62,160x92,240x137,360x206,480x275,540x309,640x366,720x412,1080x618,1212x694&from=bu&cs=1212x0');
-            background-size: cover;
+            
+            /* ИЗМЕНЕНИЕ: Фото подстраивается ровно под размеры блока и видно ПОЛНОСТЬЮ */
+            background-size: 100% 100%; 
             background-position: center;
             background-repeat: no-repeat;
+            
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,32 +55,32 @@
             max-width: 800px;
         }
 
-        /* Заголовок */
+        /* Заголовок (уменьшил размер, чтобы красиво влезал в невысокий баннер) */
         .banner-title {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* Подзаголовок */
+        /* Подзаголовок (тоже немного компактнее) */
         .banner-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
         }
 
         /* Кнопка */
         .banner-btn {
             display: inline-block;
-            padding: 15px 35px;
-            font-size: 1rem;
+            padding: 10px 30px;
+            font-size: 0.95rem;
             font-weight: 600;
             color: #ffffff;
-            background-color: #ff4757; /* Яркий цвет кнопки */
+            background-color: #ff4757; 
             border: none;
             border-radius: 50px;
             text-decoration: none;
@@ -93,14 +97,23 @@
 
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
+            .hero-banner {
+                /* На мобильных сохраняем пропорции, чтобы картинка не сжималась в узкую полоску */
+                height: auto;
+                aspect-ratio: 16 / 9; 
+                min-height: 200px;
+            }
             .banner-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
+                margin-bottom: 5px;
             }
             .banner-subtitle {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                margin-bottom: 15px;
             }
-            .hero-banner {
-                height: 60vh;
+            .banner-btn {
+                padding: 8px 20px;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -111,7 +124,7 @@
         <div class="banner-content">
             <h1 class="banner-title">Ваша идеальная поездка</h1>
             <p class="banner-subtitle">Откройте для себя невероятные места и получите незабываемые эмоции уже в этом сезоне.</p>
-            <a href="#" class="banner-btn">2025/2026год</a>
+            <a href="#" class="banner-btn">2025/2026 год</a>
         </div>
     </section>
 
