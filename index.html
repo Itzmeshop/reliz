@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фото-баннер</title>
+    <title>Фото-баннер со скроллом</title>
     <style>
+        /* Включаем плавную прокрутку для всей страницы */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Обнуляем базовые отступы */
         * {
             margin: 0;
@@ -17,14 +22,13 @@
         .hero-banner {
             position: relative;
             width: 100%;
-            height: 100vh; /* Баннер займет 30% высоты экрана */
-            min-height: 250px;
+            height: 100vh; /* Сделали баннер на весь экран, чтобы скролл вниз имел явный смысл */
+            min-height: 500px;
             
             /* Ваша ссылка на фото */
-            background-image: url('https://sun9-36.userapi.com/s/v1/ig2/FDkhHWQLz0H6QRZ_PSiMUix26wF0wQLAEe5mIW1Ux544ntxgJRKpbN7i8QbdJ0RaD7Us94MaqAcFfHYKCJoFaI1c.jpg?quality=95&as=32x18,48x27,72x41,108x62,160x92,240x137,360x206,480x275,540x309,640x366,720x412,1080x618,1212x694&from=bu&cs=1212x0');
+            background-image: url('https://sun9-36.vkuserphoto.ru/s/v1/ig2/FDkhHWQLz0H6QRZ_PSiMUix26wF0wQLAEe5mIW1Ux544ntxgJRKpbN7i8QbdJ0RaD7Us94MaqAcFfHYKCJoFaI1c.jpg?quality=95&as=32x18,48x27,72x41,108x62,160x92,240x137,360x206,480x275,540x309,640x366,720x412,1080x618,1212x694&from=bu&cs=1212x0');
             
-            /* ИЗМЕНЕНИЕ: Фото подстраивается ровно под размеры блока и видно ПОЛНОСТЬЮ */
-            background-size: 100% 100%; 
+            background-size: cover; /* Для полноэкранного баннера cover подходит лучше, чтобы не было пустых полей */
             background-position: center;
             background-repeat: no-repeat;
             
@@ -48,36 +52,37 @@
         /* Контент баннера */
         .banner-content {
             position: relative;
-            z-index: 2; /* Поднимаем текст над темным фильтром */
+            z-index: 2;
             text-align: center;
             color: #ffffff;
             padding: 0 20px;
             max-width: 800px;
+            margin-bottom: 50px; /* Оставляем место внизу для иконки мышки */
         }
 
-        /* Заголовок (уменьшил размер, чтобы красиво влезал в невысокий баннер) */
+        /* Заголовок */
         .banner-title {
-            font-size: 2.2rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* Подзаголовок (тоже немного компактнее) */
+        /* Подзаголовок */
         .banner-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
         }
 
         /* Кнопка */
         .banner-btn {
             display: inline-block;
-            padding: 10px 30px;
-            font-size: 0.95rem;
+            padding: 12px 35px;
+            font-size: 1rem;
             font-weight: 600;
             color: #ffffff;
             background-color: #ff4757; 
@@ -88,32 +93,119 @@
             box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
         }
 
-        /* Эффект при наведении на кнопку */
         .banner-btn:hover {
             background-color: #ff6b81;
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
         }
 
+        /* Анимированный индикатор мышки для скролла */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            color: #ffffff;
+        }
+
+        /* Корпус мышки */
+        .mouse {
+            width: 26px;
+            height: 42px;
+            border: 2px solid currentColor;
+            border-radius: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        /* Колёсико мышки и его анимация */
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background-color: currentColor;
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-wheel 1.6s infinite ease-in-out;
+        }
+
+        /* Анимация движения колёсика вниз */
+        @keyframes scroll-wheel {
+            0% {
+                top: 8px;
+                opacity: 1;
+            }
+            50% {
+                top: 18px;
+                opacity: 0.3;
+            }
+            100% {
+                top: 8px;
+                opacity: 1;
+            }
+        }
+
+        /* Секция контента под баннером (куда будет идти прокрутка) */
+        .main-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2f3542;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            color: #57606f;
+            line-height: 1.6;
+        }
+
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .hero-banner {
-                /* На мобильных сохраняем пропорции, чтобы картинка не сжималась в узкую полоску */
-                height: auto;
-                aspect-ratio: 16 / 9; 
-                min-height: 200px;
+                height: 100vh; /* На смартфонах баннер тоже займет весь экран */
+                min-height: 450px;
             }
             .banner-title {
-                font-size: 1.5rem;
-                margin-bottom: 5px;
+                font-size: 1.8rem;
+                margin-bottom: 10px;
             }
             .banner-subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
+                font-size: 1rem;
+                margin-bottom: 20px;
             }
             .banner-btn {
-                padding: 8px 20px;
-                font-size: 0.85rem;
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            .mouse {
+                width: 22px;
+                height: 36px;
+            }
+            .scroll-indicator {
+                bottom: 20px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -124,8 +216,20 @@
         <div class="banner-content">
             <h1 class="banner-title">Ваша идеальная поездка</h1>
             <p class="banner-subtitle">Откройте для себя невероятные места и получите незабываемые эмоции уже в этом сезоне.</p>
-            <a href="#" class="banner-btn">2025/2026 год</a>
+            <a href="#next-section" class="banner-btn">2025/2026 год</a>
         </div>
+
+        <a href="#next-section" class="scroll-indicator" aria-label="Прокрутить вниз">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Листайте вниз</span>
+        </a>
+    </section>
+
+    <section id="next-section" class="main-content">
+        <h2>Добро пожаловать в путешествие</h2>
+        <p>Здесь начинается основной контент вашего сайта. При прокрутке колёсиком мыши, свайпом на телефоне или при клике на кнопку «Листайте вниз» страница плавно переместится к этой текстовой секции.</p>
     </section>
 
 </body>
