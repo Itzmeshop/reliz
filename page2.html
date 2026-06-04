@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сезон 2025/2026</title>
+    <title>Сезон 2025/2026 — Галерея</title>
     <style>
         * {
             margin: 0;
@@ -15,60 +15,187 @@
         body {
             background-color: #f1f2f6;
             color: #2f3542;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 80px 20px 40px 20px; /* Сверху увеличен отступ, чтобы контент не залезал под кнопку Назад */
             min-height: 100vh;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* Кнопка НАЗАД в левом верхнем углу */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2f3542;
+            background-color: #ffffff;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #f1f2f6;
+            transform: translateX(-3px); /* Легкое смещение влево */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Главный контейнер */
         .container {
             background: #ffffff;
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            max-width: 600px;
+            max-width: 1000px; /* Расширил контейнер, чтобы поместились 3 баннера */
             width: 100%;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-size: 2.5rem;
             color: #ff4757;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         p {
             font-size: 1.1rem;
             color: #57606f;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* Стильная кнопка Назад */
-        .back-btn {
-            display: inline-flex;
+        /* Сетка для 3 мини-баннеров */
+        .banners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 равные колонки в ряд */
+            gap: 20px; /* Отступы между баннерами */
+            margin-top: 30px;
+            width: 100%;
+        }
+
+        /* Карточка мини-баннера */
+        .mini-banner {
+            position: relative;
+            height: 220px; /* Высота карточки */
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #2f3542;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none; /* Если баннер будет ссылкой */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        /* Эффект при наведении на мини-баннер */
+        .mini-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Фоновые изображения для каждого баннера */
+        .banner-1 {
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=1');
+            background-size: cover;
+            background-position: center;
+        }
+        .banner-2 {
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=2');
+            background-size: cover;
+            background-position: center;
+        }
+        .banner-3 {
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=3');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Иконка "Плей" (для видео-баннеров) */
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #2f3542;
-            background-color: #e4e7eb;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            transition: background 0.3s, transform 0.3s;
+        }
+        /* Символ треугольника внутри кнопки плей */
+        .play-icon::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 16px;
+            border-color: transparent transparent transparent #2f3542;
+            margin-left: 4px;
         }
 
-        .back-btn:hover {
-            background-color: #d2d6dc;
-            transform: translateX(-5px); /* Кнопка слегка сдвигается влево при наведении */
+        .mini-banner:hover .play-icon {
+            background: #ff4757;
+            transform: translate(-50%, -50%) scale(1.1);
         }
+        .mini-banner:hover .play-icon::after {
+            border-color: transparent transparent transparent #ffffff;
+        }
+
+        /* Текст внутри мини-баннеров */
+        .banner-text {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Метка "Фото" или "Видео" сверху баннера */
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .badge.video { background: #ff4757; }
 
         /* Оптимизация под мобильные экраны */
         @media (max-width: 768px) {
+            body {
+                padding-top: 80px; /* Дополнительное место на мобильных */
+            }
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
             .container {
-                padding: 25px 20px;
+                padding: 25px 15px;
             }
             h1 {
                 font-size: 1.8rem;
@@ -76,16 +203,45 @@
             p {
                 font-size: 1rem;
             }
+            /* Перестраиваем баннеры в 1 колонку (один под другим) на смартфонах */
+            .banners-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .mini-banner {
+                height: 180px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <a href="index.html" class="back-btn">← На главную</a>
+
     <div class="container">
         <h1>Сезон 2025/2026</h1>
-        <p>Вы успешно перешли на новую страницу сайта! Здесь вы можете разместить подробную информацию о турах, расписании или предложениях на новый сезон.</p>
+        <p>Медиагалерея нашей команды. Смотрите видеоотчеты и лучшие кадры из прошлых поездок.</p>
         
-        <a href="index.html" class="back-btn">← Назад на главную</a>
+        <div class="banners-grid">
+            
+            <a href="#" class="mini-banner banner-1">
+                <span class="badge video">Видео</span>
+                <div class="play-icon"></div>
+                <div class="banner-text">Обзорный трейлер</div>
+            </a>
+
+            <a href="#" class="mini-banner banner-2">
+                <span class="badge">Фото</span>
+                <div class="banner-text">Лучшие моменты</div>
+            </a>
+
+            <a href="#" class="mini-banner banner-3">
+                <span class="badge video">Видео</span>
+                <div class="play-icon"></div>
+                <div class="banner-text">Интервью с участниками</div>
+            </a>
+
+        </div>
     </div>
 
 </body>
