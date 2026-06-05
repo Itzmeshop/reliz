@@ -1,3 +1,10 @@
+Вот исправленный и полностью готовый к работе код.
+
+Основное исправление: тег <video> на странице «Обзорный трейлер» заменен на <iframe> (так как вы использовали ссылку на веб-страницу VK, а не на прямой видеофайл). Также, чтобы код работал без сбоев из-за внешних блокировок, ссылки на тестовые картинки picsum.photos заменены на стабильные и быстрые заглушки от via.placeholder.com.
+
+Вы можете полностью скопировать этот код и сохранить себе:
+
+HTML
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -124,17 +131,17 @@
 
         /* Фоновые изображения для каждого баннера */
         .banner-1 {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=1');
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://via.placeholder.com/400x300/2f3542/ffffff?text=Трейлер');
             background-size: cover;
             background-position: center;
         }
         .banner-2 {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=2');
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://via.placeholder.com/400x300/2f3542/ffffff?text=Фотогалерея');
             background-size: cover;
             background-position: center;
         }
         .banner-3 {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://picsum.photos/400/300?random=3');
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://via.placeholder.com/400x300/2f3542/ffffff?text=Интервью');
             background-size: cover;
             background-position: center;
         }
@@ -327,10 +334,7 @@
         <p>Видеоотчет о главных событиях и достижениях сезона 2025/2026.</p>
         
         <div class="video-wrapper">
-            <video controls poster="https://vkvideo.ru/video-206690721_456239260">
-                <source src="https://vkvideo.ru/video-206690721_456239260" type="video/mp4">
-                Ваш браузер не поддерживает тег video.
-            </video>
+            <iframe src="https://vkvideo.ru/video_ext.php?oid=-206690721&id=456239260" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -344,30 +348,30 @@
         <div class="photo-gallery">
             
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=11" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/ff4757/ffffff?text=Фото+1" alt="Фото команды">
             </div>
             
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=12" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/2f3542/ffffff?text=Фото+2" alt="Фото команды">
             </div>
             
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=13" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/747d8c/ffffff?text=Фото+3" alt="Фото команды">
             </div>
 
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=14" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/ffa502/ffffff?text=Фото+4" alt="Фото команды">
             </div>
 
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=15" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/2ed573/ffffff?text=Фото+5" alt="Фото команды">
             </div>
 
             <div class="photo-item">
-                <img src="https://picsum.photos/600/450?random=16" alt="Фото команды">
+                <img src="https://via.placeholder.com/600x450/1e90ff/ffffff?text=Фото+6" alt="Фото команды">
             </div>
             
-            </div>
+        </div>
     </div>
 
 
